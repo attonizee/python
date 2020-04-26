@@ -1,4 +1,5 @@
 class Trash:
+
     def __init__(self, limit):
         self.limit = limit
 
@@ -7,11 +8,12 @@ class Trash:
 
     def status(self, garb):
         if garb.size <= self.limit:
-            print(f'{garb} is in the trash')
+            print(f'{garb.size} is in the trash')
         else:
-            print(f'The size of {garb} bigger than trash limit {self.limit}')
+            print(f'The size of {garb.size} bigger than trash limit {self.limit}')
 
 class Bag(Trash):
+
     def __init__(self, limit):
         self.limit = limit
 
@@ -20,11 +22,12 @@ class Bag(Trash):
 
     def status(self, garb):
         if garb.size <= self.limit:
-            print(f'{garb} is in the bag')
+            print(f'{garb.size} is in the bag')
         else:
             print(f'The size is bigger than bag limit {self.limit}')
 
 class Put:
+    
     def __init__(self, size):
         self.size = size
 
