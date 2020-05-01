@@ -1,45 +1,82 @@
 import random
 
-words = ['admin', 'developer', 'devops' ]
-lifes = 8
-errors = 0
-used = []
-word = random.choice(words)
-result_word = '_ ' * len(word)
+WORDS = ['admin', 'developer', 'devops' ]
+LIFES = 8
 
 
+def random_word_init():
+    return random.choice(WORDS)
 
-play = ''
-while play != 'n':
-    play = input('Do you wanna play? y/n ')
-    print(f'I chosed the word, try to guess. You got {lifes} lifes every mistake lower your lifes.')
-    print(f'The word is looks\n {result_word}\n')
-    while errors < lifes and result_word != word:    
-        user_letter = (input('Enter the letter: '))
-        if user_letter in word:
-            part = ''
-            for i in range(len(word)):
-                if user_letter == word[i]:
-                    part += user_letter
-                else:
-                    part += result_word[i]
-            result_word = part
-            print(f'The word is now\n {result_word}\n')
+
+def user_input():
+    user_letter = input('Enter the letter: ')
+    return user_letter
+
+
+def word_status_init(word):
+    status = []
+    for letter in word:
+        status.append(False)
+    return status
+
+
+def game_is_over(status, current_errors):
+    if current_errors >= LIFES:
+        return True
+
+    for stat in status:
+        if not stat:
+            return False
+
+    return True
+
+
+def perform_check(word, status, letter):
+    if letter not in word:
+        return False
+
+    for index, l in enumerate(word):
+        if letter == l:
+            status[index] = True
+
+    return True
+
+def print_word(word, status):
+    for index, letter in enumerate(word):
+        if status[index]:
+            print(letter, end='')
         else:
-            print(f'The letter {user_letter} not in word, try more')
-            errors += 1
-            used.append(user_letter)
+            print('_', end=' ')
+
+    print()
+
+
+def main():
+    word = random_word_init()
+    status = word_status_init(word)
+    current_errors = 0
+    used = []
+    print(f'I chosed the word, try to guess. You got {LIFES} lifes every mistake lower your lifes.')
+
+    while not game_is_over(status, current_errors):
+        print_word(word, status)
+        print('Errors left ', LIFES - current_errors)
+        letter = user_input()
+        result = perform_check(word, status, letter)
+
+        if not result:
+            print(f'The letter {letter} not in word, try more')
+            current_errors += 1
+            used.append(letter)
             print(f'You already used letters {used}')
 
-    if result_word == word:
-        print(f'Congratulation, you win! The word is: "{result_word}"')
-    elif errors == lifes:
-        print('You are dead. Game over')
+    if result:
+        print_word(word, status)
+        print('Congratulation, you win!')
     else:
-        print('Something wrong!')
-        
+        print('You are dead. Game over')
+   
 
-
-        
-        
-
+if __name__=='__main__':
+    main()
+    
