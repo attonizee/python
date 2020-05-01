@@ -12,6 +12,7 @@ class Trash:
         else:
             print(f'The size of {garb.size} bigger than trash limit {self.limit}')
 
+
 class Bag(Trash):
 
     def __init__(self, limit):
@@ -26,10 +27,12 @@ class Bag(Trash):
         else:
             print(f'The size is bigger than bag limit {self.limit}')
 
+
 class Put:
     
     def __init__(self, size):
         self.size = size
+
 
 box1 = Trash(10)
 box1.get_limit()

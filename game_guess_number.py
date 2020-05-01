@@ -15,6 +15,7 @@ max_count = levels[level]
 
 user_count = int(input('Enter number of users: '))
 users = []
+
 for i in range(user_count):
     users.append(input(f'Enter user {i} name: '))
 print(f'The our players {users}')
@@ -24,13 +25,16 @@ winner_name = None
 
 while not is_the_winner:
     count += 1
+    
     if count > max_count:
         print('Your attemps is over. You lose')
         break
     print(f'Attemp №{count}')
+    
     for user in users:
         print(f'Now is {user} try')
         user_number = int(input('Computer  made a number, try to guess it. Enter number from 1 to 100: '))
+        
         if user_number == number:
             is_the_winner = True
             winner_name = user
@@ -41,6 +45,7 @@ while not is_the_winner:
             print('Your number is bigger, try more')
         else:
             ('Wrong number, enter from 1 to 100')
+
 else:
     print(f'Congratulation! {winner_name} is win!')
     

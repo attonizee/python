@@ -40,6 +40,7 @@ def perform_check(word, status, letter):
             status[index] = True
 
     return True
+    
 
 def print_word(word, status):
     for index, letter in enumerate(word):
@@ -77,6 +78,6 @@ def main():
         print('You are dead. Game over')
    
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
     

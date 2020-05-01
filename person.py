@@ -15,6 +15,7 @@ class Person(object):
         check = person in self.known
         print(f'{self.name} {text_out[check]} {person}')
 
+
 person1 = Person(22, 'Ivan')
 person1.know('Roma')
 person1.is_known('Roma')

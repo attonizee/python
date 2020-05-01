@@ -6,12 +6,14 @@ class Printer(object):
         self.values = [v for v in values]
         print(self.values)
 
+
 class FormattedPrinter(Printer):
     
     def formated_log(self, *values):
         print('*****************************')
         self.log(*values)
         print('*****************************')
+
 
 pr1 = Printer()
 pr1.log(10, 20, 50)

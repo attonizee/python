@@ -2,12 +2,14 @@
 import os
 import sys
 
+
 print("First programm")
 print("Hello")
-name = input ("Your name :")
+name = input ("Your name: ")
 
 print(name, ", welcome to Python!")
 answer = input("Let's work? (Y/N)")
+
 
 if answer.lower() == 'y':
     print("Good man")
@@ -28,5 +30,6 @@ if answer.lower() == 'y':
 
 elif answer.lower() == 'n':
     print("Goodbye")
+
 else:
     print("Wrong answer")
