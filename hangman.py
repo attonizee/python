@@ -43,14 +43,28 @@ HANGMAN_PICS = ['''
     O   |
    /|\  |
    / \  |
+       ===''', '''
+    +---+
+    |   |
+   (O   |
+   /|\  |
+   / \  |
+       ===''', '''
+    +---+
+    |   |
+   (O)  |
+   /|\  |
+   / \  |
        ===''']
 
-words = ['devops', 'developer', 'designer', 'admin', 'accountant', 'marketolog']
+words = {'professions': 'devops developer designer admin accountant marketolog'.split(),
+'animals': 'lion zebra rabbit horse dog cat aligator'.split()}
 
 
-def Get_Random_Word(wordList):
-    wordIndex = random.randint(0, len(wordList) - 1)
-    return wordList[wordIndex]
+def Get_Random_Word(wordDict):
+    wordKey = random.choice(list(wordDict.keys()))
+    wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)
+    return wordDict[wordKey][wordIndex], wordKey
 
 
 def display_Board(missedLetters, correctLetters, secretWord):
@@ -93,14 +107,41 @@ def play_Again():
     return input().lower().startswith('y')
 
 
+def difficulty_Level():
+    difficulty = ''
+    while True:
+        print('Choose difficulty level. E - easy, M - Medium, H - Hard')
+        difficulty = input().upper()
+
+        if difficulty == 'E':
+            break
+
+        elif difficulty == 'M':
+            del HANGMAN_PICS[8]
+            del HANGMAN_PICS[7]
+            break
+
+        elif difficulty == 'H':
+            del HANGMAN_PICS[8]
+            del HANGMAN_PICS[7]
+            del HANGMAN_PICS[5]
+            del HANGMAN_PICS[3]
+            break
+        else:
+            print('Make right choice')
+
+
 def main():
-    print('Hangman')
+    print('H A N G M A N')
+    difficulty_Level()
     missedLetters = ''
     correctLetters = ''
-    secretWord = Get_Random_Word(words)
+    secretWord, secretSet = Get_Random_Word(words)
     gameIsDone = False
 
     while True:
+        print(f'Secret word from category {secretSet}')
+
         display_Board(missedLetters, correctLetters, secretWord)
 
         guess = get_Guess(missedLetters + correctLetters)
@@ -127,7 +168,7 @@ def main():
                 missedLetters = ''
                 correctLetters = ''
                 gameIsDone = False
-                secretWord = Get_Random_Word(words)
+                secretWord, secretSet = Get_Random_Word(words)
             else:
                 break
 
